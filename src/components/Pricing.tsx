@@ -38,7 +38,7 @@ const Pricing = () => {
                 <h3 className="text-3xl font-bold text-foreground mb-4">Entry Package</h3>
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <span className="text-6xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    ₹500
+                    ₹800
                   </span>
                 </div>
                 <p className="text-xl text-muted-foreground">per person</p>

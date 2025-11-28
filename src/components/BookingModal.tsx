@@ -54,7 +54,7 @@ const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
 
           <div className="text-center">
             <p className="text-sm text-muted-foreground">
-              <strong>Price:</strong> ₹500 per person
+              <strong>Price:</strong> ₹800 per person
             </p>
             <p className="text-sm text-muted-foreground mt-1">
               Special rates available for group bookings

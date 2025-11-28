@@ -40,7 +40,7 @@ const Hero = () => {
               onClick={() => scrollToSection("pricing")}
               className="bg-gradient-to-r from-primary to-secondary hover:shadow-2xl transition-all duration-300 text-lg px-8 py-6 animate-scale-in"
             >
-              Book Your Jump - ₹500
+              Book Your Jump - ₹800
             </Button>
             <Button
               size="lg"
