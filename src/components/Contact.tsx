@@ -3,7 +3,10 @@ import { MapPin, Phone, Clock } from "lucide-react";
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-muted to-background">
+    <section
+      id="contact"
+      className="py-20 bg-gradient-to-b from-muted to-background"
+    >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
@@ -11,7 +14,8 @@ const Contact = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Come experience the fun at Take-off Trampoline Park in Misrod, Bhopal
+            Come experience the fun at Take-off Trampoline Park in Misrod,
+            Bhopal
           </p>
         </div>
 
@@ -23,9 +27,12 @@ const Contact = () => {
                   <MapPin className="text-white" size={24} />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-foreground mb-2">Location</h3>
+                  <h3 className="text-xl font-bold text-foreground mb-2">
+                    Location
+                  </h3>
                   <p className="text-muted-foreground">
-                    Misrod, Bhopal<br />
+                    Near RajaBhoj ITI, Misrod, Bhopal
+                    <br />
                     Madhya Pradesh, India
                   </p>
                 </div>
@@ -36,14 +43,19 @@ const Contact = () => {
                   <Phone className="text-white" size={24} />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-foreground mb-2">Contact Numbers</h3>
+                  <h3 className="text-xl font-bold text-foreground mb-2">
+                    Contact Numbers
+                  </h3>
                   <div className="space-y-1">
-                    <a href="tel:9111385771" className="block text-muted-foreground hover:text-primary transition-colors">
+                    <a
+                      href="tel:9111385771"
+                      className="block text-muted-foreground hover:text-primary transition-colors"
+                    >
                       9111385771
                     </a>
-                    <a href="tel:8889006941" className="block text-muted-foreground hover:text-primary transition-colors">
+                    {/* <a href="tel:8889006941" className="block text-muted-foreground hover:text-primary transition-colors">
                       8889006941
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </div>
@@ -53,9 +65,12 @@ const Contact = () => {
                   <Clock className="text-white" size={24} />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-foreground mb-2">Opening Hours</h3>
+                  <h3 className="text-xl font-bold text-foreground mb-2">
+                    Opening Hours
+                  </h3>
                   <p className="text-muted-foreground">
-                    Open Daily<br />
+                    Open Daily
+                    <br />
                     Call for timings
                   </p>
                 </div>
@@ -63,17 +78,20 @@ const Contact = () => {
             </div>
           </Card>
 
-          <Card className="p-0 overflow-hidden hover:shadow-xl transition-all duration-300 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+          <Card
+            className="p-0 overflow-hidden hover:shadow-xl transition-all duration-300 animate-fade-in-up"
+            style={{ animationDelay: "0.2s" }}
+          >
             <div className="h-full min-h-[400px]">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3666.7326729862726!2d77.4852445!3d23.2166945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDEzJzAwLjEiTiA3N8KwMjknMDYuOSJF!5e0!3m2!1sen!2sin!4v1234567890"
+                src="https://www.google.com/maps?q=23.16084776391898,77.46618011291046&z=15&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Take-off Trampoline Park location in Misrod, Bhopal"
+                title="Take-off Trampoline Park location"
               ></iframe>
             </div>
           </Card>
@@ -84,7 +102,8 @@ const Contact = () => {
             Ready to Jump?
           </h3>
           <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Call us now to book your slot or just drop by! We're excited to welcome you to Bhopal's most fun trampoline park.
+            Call us now to book your slot or just drop by! We're excited to
+            welcome you to Bhopal's most fun trampoline park.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

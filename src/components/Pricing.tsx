@@ -8,10 +8,10 @@ const Pricing = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const features = [
-    "Access to all 5 activities",
+    "Access to all activities",
     "Safety equipment included",
     "Trained staff supervision",
-    "Locker facility available",
+    "Restaurant and snack bar access",
     "Comfortable seating area",
   ];
 
@@ -42,6 +42,7 @@ const Pricing = () => {
                   </span>
                 </div>
                 <p className="text-xl text-muted-foreground">per person</p>
+
               </div>
 
               <div className="space-y-4 mb-8">
@@ -56,13 +57,7 @@ const Pricing = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                <div className="flex items-center gap-3 p-4 bg-muted rounded-lg">
-                  <Clock className="text-primary" size={24} />
-                  <div>
-                    <p className="font-semibold text-foreground">Duration</p>
-                    <p className="text-sm text-muted-foreground">Full day access</p>
-                  </div>
-                </div>
+                
                 <div className="flex items-center gap-3 p-4 bg-muted rounded-lg">
                   <Users className="text-secondary" size={24} />
                   <div>

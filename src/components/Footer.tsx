@@ -84,9 +84,9 @@ const Footer = () => {
                   <a href="tel:9111385771" className="block text-muted-foreground hover:text-primary transition-colors">
                     9111385771
                   </a>
-                  <a href="tel:8889006941" className="block text-muted-foreground hover:text-primary transition-colors">
+                  {/* <a href="tel:8889006941" className="block text-muted-foreground hover:text-primary transition-colors">
                     8889006941
-                  </a>
+                  </a> */}
                 </div>
               </div>
             </div>
@@ -97,9 +97,6 @@ const Footer = () => {
         <div className="border-t border-border pt-8">
           <div className="text-center text-muted-foreground">
             <p>&copy; {new Date().getFullYear()} Take-off Trampoline Park. All rights reserved.</p>
-            <p className="mt-2 text-sm">
-              Built with ❤️ for jumping enthusiasts in Bhopal
-            </p>
           </div>
         </div>
       </div>

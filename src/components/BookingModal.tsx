@@ -42,13 +42,13 @@ const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
                 <Phone className="text-primary" size={20} />
                 <span className="font-semibold">9111385771</span>
               </a>
-              <a
+              {/* <a
                 href="tel:8889006941"
                 className="flex items-center justify-center gap-3 p-4 bg-muted hover:bg-muted/80 rounded-lg transition-colors"
               >
                 <Phone className="text-primary" size={20} />
                 <span className="font-semibold">8889006941</span>
-              </a>
+              </a> */}
             </div>
           </div>
 
