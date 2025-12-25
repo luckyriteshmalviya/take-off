@@ -23,9 +23,9 @@ const Gallery = () => {
     { src: Video_4, type: 'video' as const, alt: "Group Activities" },
     { src: Video_5, type: 'video' as const, alt: "Park Highlights" },
     { src: Video_6, type: 'video' as const, alt: "Exciting Jumps" },
-    { src: spiderWebImg, type: 'image' as const, alt: "Spider Web Activity" },
-    { src: foamPitImg, type: 'image' as const, alt: "Foam Pit Jump" },
-    { src: ballPoolImg, type: 'image' as const, alt: "Ball Pool Dodge Ball" },
+    // { src: spiderWebImg, type: 'image' as const, alt: "Spider Web Activity" },
+    // { src: foamPitImg, type: 'image' as const, alt: "Foam Pit Jump" },
+    // { src: ballPoolImg, type: 'image' as const, alt: "Ball Pool Dodge Ball" },
   ];
 
   return (
@@ -49,7 +49,7 @@ const Gallery = () => {
               style={{ animationDelay: `${index * 0.1}s` }}
               onClick={() => setSelectedMedia(item)}
             >
-              {item.type === 'image' ? (
+              {item.type !== 'video' ? (
                 <img
                   src={item.src}
                   alt={`${item.alt} - Take-off Trampoline Park Bhopal`}

@@ -56,20 +56,21 @@ const Activities = () => {
           {activities.map((activity, index) => (
             <Card
               key={index}
-              className="group overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 animate-fade-in-up border-0"
+              className="p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-fade-in-up border-2 border-border bg-card"
+              // className={`group overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 animate-fade-in-up border-0 bg-gradient-to-t ${activity.color}`}
               style={{ animationDelay: `${index * 0.15}s` }}
             >
-              <div className="relative h-64 overflow-hidden">
-                <img
+              {/* <div className="relative h-12 overflow-hidden">
+                 <img
                   src={activity.image}
                   alt={`${activity.title} - Fun activity at Take-off Trampoline Park Bhopal`}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className={`absolute inset-0 bg-gradient-to-t ${activity.color} opacity-40 group-hover:opacity-30 transition-opacity duration-500`}></div>
-                <div className="absolute top-4 right-4 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
+                /> 
+                 <div className={`absolute inset-0  opacity-40 group-hover:opacity-30 transition-opacity duration-500`}></div> 
+                <div className="absolute top-4 right-4 w-12 h-6 bg-white rounded-full flex items-center justify-center shadow-lg">
                   <span className="text-2xl font-bold text-foreground">{index + 1}</span>
                 </div>
-              </div>
+              </div> */}
               <div className="p-6">
                 <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
                   {activity.title}
