@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { activities } from "@/data/activities";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,16 +7,36 @@ import { Link } from "react-router-dom";
 
 const ActivitiesSection = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
       const scrollAmount = 320;
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
+      const container = scrollRef.current;
+      const maxScroll = container.scrollWidth - container.clientWidth;
+      
+      if (direction === "right" && container.scrollLeft >= maxScroll - 10) {
+        container.scrollTo({ left: 0, behavior: "smooth" });
+      } else if (direction === "left" && container.scrollLeft <= 10) {
+        container.scrollTo({ left: maxScroll, behavior: "smooth" });
+      } else {
+        container.scrollBy({
+          left: direction === "left" ? -scrollAmount : scrollAmount,
+          behavior: "smooth",
+        });
+      }
     }
   };
+
+  useEffect(() => {
+    if (isPaused) return;
+    
+    const interval = setInterval(() => {
+      scroll("right");
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -91,6 +111,8 @@ const ActivitiesSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
           {activities.map((activity) => (
             <motion.div
