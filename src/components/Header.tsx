@@ -10,7 +10,7 @@ interface HeaderProps {
 
 const navLinks = [
   { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
+  // { name: "About", path: "/about" },
   { name: "Activities", path: "/activities" },
   { name: "Gallery", path: "/gallery" },
   { name: "Pricing", path: "/pricing" },
@@ -57,7 +57,7 @@ const Header = ({ onOfferClick }: HeaderProps) => {
               <h1 className="text-xl md:text-2xl font-heading font-bold text-primary">
                 Take Off
               </h1>
-              <p className="text-[10px] text-muted-foreground hidden sm:block">
+              <p className="tex text-muted-foreground hidden sm:block">
                 Trampoline Park
               </p>
             </div>
@@ -72,7 +72,7 @@ const Header = ({ onOfferClick }: HeaderProps) => {
                 className={`link-underline font-medium transition-colors ${
                   location.pathname === link.path
                     ? "text-primary"
-                    : "text-foreground hover:text-primary"
+                    : "text-primary"
                 }`}
               >
                 {link.name}
@@ -95,9 +95,9 @@ const Header = ({ onOfferClick }: HeaderProps) => {
               </motion.div>
               <span className="hidden lg:inline">Offers</span>
             </button>
-            <a href="tel:7415077577" className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
+            <a href="tel:9111385771" className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
               <Phone className="w-4 h-4" />
-              <span className="hidden lg:inline">7415077577</span>
+              <span className="hidden lg:inline">9111385771</span>
             </a>
             <Button className="btn-bounce gradient-primary text-primary-foreground shadow-button">
               Book Now
@@ -151,11 +151,11 @@ const Header = ({ onOfferClick }: HeaderProps) => {
                 className="pt-4 flex flex-col gap-3"
               >
                 <a
-                  href="tel:7415077577"
+                  href="tel:9111385771"
                   className="flex items-center gap-2 text-foreground"
                 >
                   <Phone className="w-5 h-5 text-primary" />
-                  <span>7415077577</span>
+                  <span className="text-primary">9111385771</span>
                 </a>
                 <Button className="w-full gradient-primary text-primary-foreground">
                   Book Now

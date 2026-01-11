@@ -3,61 +3,48 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { activities } from "@/data/activities";
 
-// Dummy images for activities
-const activityImages = [
-  "https://images.unsplash.com/photo-1551524559-8af4e6624178?w=600",
-  "https://images.unsplash.com/photo-1535572290543-960a8046f5af?w=600",
-  "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600",
-  "https://images.unsplash.com/photo-1522163182402-834f871fd851?w=600",
-  "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600",
-  "https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=600",
-  "https://images.unsplash.com/photo-1472162072942-cd5147eb3902?w=600",
-  "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600",
-  "https://images.unsplash.com/photo-1551524559-8af4e6624178?w=600",
-  "https://images.unsplash.com/photo-1535572290543-960a8046f5af?w=600",
-  "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600",
-  "https://images.unsplash.com/photo-1522163182402-834f871fd851?w=600",
-  "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600",
-  "https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=600",
-  "https://images.unsplash.com/photo-1472162072942-cd5147eb3902?w=600",
-  "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600",
-];
-
 const Activities = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Header />
+
       <main>
-        {/* Hero Section */}
-        <section className="pt-32 pb-20 gradient-hero relative overflow-hidden">
+        {/* Hero Section – Take Off Theme */}
+        <section className="relative pt-32 pb-20 overflow-hidden bg-black">
+          {/* Soft glow */}
+          <div className="absolute inset-0 bg-black/40" />
+
+          {/* Floating energy */}
           <motion.div
-            className="absolute bottom-10 right-10 text-9xl opacity-20"
-            animate={{ rotate: [0, 10, -10, 0] }}
-            transition={{ duration: 5, repeat: Infinity }}
+            className="absolute top-24 right-16 text-8xl "
+            animate={{ y: [0, -20, 0], rotate: [0, 8, -8, 0] }}
+            transition={{ duration: 6, repeat: Infinity }}
           >
-            🎢
+            🚀
           </motion.div>
+
           <div className="container-custom relative text-center text-primary-foreground">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6"
             >
-              Our Activities 🎪
+              Our Activities
             </motion.h1>
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               className="text-lg md:text-xl max-w-3xl mx-auto opacity-90"
             >
-              16+ thrilling activities for all ages! From foam pits to wall climbing, 
-              discover endless fun at Take Off.
+              16+ high-energy attractions designed to make you jump higher, fly longer,
+              and land smiling at Take Off Trampoline Park.
             </motion.p>
           </div>
         </section>
 
-        {/* Activities Grid */}
+        {/* Activities Grid (unchanged) */}
         <section className="section-padding bg-background">
           <div className="container-custom">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -72,25 +59,18 @@ const Activities = () => {
                   className="group cursor-pointer"
                 >
                   <div className="relative h-80 rounded-2xl overflow-hidden shadow-card">
-                    {/* Image Background */}
                     <img
-                      src={activityImages[index % activityImages.length]}
-                      alt={activity.title}
+                      src={activity.image}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    {/* Gradient Overlay */}
-                    <div className={`absolute inset-0 bg-gradient-to-t ${activity.color} opacity-70 group-hover:opacity-80 transition-opacity`} />
-                    
-                    {/* Content */}
+
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-t ${activity.color} hover:bg-transparent opacity-70 group-hover:opacity-80 transition-opacity`}
+                    />
+
                     <div className="absolute inset-0 p-6 flex flex-col justify-between text-primary-foreground">
-                      <motion.span
-                        className="text-5xl"
-                        whileHover={{ scale: 1.3, rotate: 15 }}
-                        transition={{ type: "spring" }}
-                      >
-                        {activity.icon}
-                      </motion.span>
-                      
+                      <span className="text-5xl">{activity.icon}</span>
+
                       <div>
                         <h3 className="text-xl font-heading font-bold mb-2">
                           {activity.title}
@@ -100,8 +80,7 @@ const Activities = () => {
                         </p>
                       </div>
 
-                      {/* Decorative Circle */}
-                      <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/10 rounded-full group-hover:scale-150 transition-transform duration-500" />
+                      <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/10 rounded-full" />
                     </div>
                   </div>
                 </motion.div>
@@ -110,7 +89,7 @@ const Activities = () => {
           </div>
         </section>
 
-        {/* Safety Note */}
+        {/* Safety Note (unchanged) */}
         <section className="py-16 bg-muted">
           <div className="container-custom">
             <motion.div
@@ -124,14 +103,14 @@ const Activities = () => {
                 Safety is Our Priority
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                All our activities are designed with international safety standards. 
-                Trained staff supervise every zone, and safety briefings are mandatory 
-                for all visitors. Grip socks are provided free with every entry!
+                All activities follow international safety standards with trained
+                staff supervision and complimentary grip socks for every guest.
               </p>
             </motion.div>
           </div>
         </section>
       </main>
+
       <Footer />
     </div>
   );

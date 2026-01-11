@@ -82,12 +82,12 @@ const AboutSection = () => {
               ))}
             </div>
 
-            <Link to="/about">
+            {/* <Link to="/">
               <Button className="btn-bounce gradient-primary text-primary-foreground shadow-button">
                 Learn More About Us
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
-            </Link>
+            </Link> */}
           </motion.div>
 
           {/* Visual */}

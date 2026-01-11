@@ -57,8 +57,8 @@ const ContactSection = () => {
     {
       icon: Phone,
       title: "Call Us",
-      value: "7415077577",
-      href: "tel:7415077577",
+      value: "9111385771",
+      href: "tel:9111385771",
     },
     {
       icon: Mail,
@@ -239,7 +239,7 @@ const ContactSection = () => {
             {/* Google Map */}
             <div className="rounded-2xl overflow-hidden shadow-card" id="map">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3666.3!2d77.47!3d23.23!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDEzJzQ4LjAiTiA3N8KwMjgnMTIuMCJF!5e0!3m2!1sen!2sin!4v1234567890"
+                src="https://www.google.com/maps?q=23.16084776391898,77.46618011291046&z=15&output=embed"
                 width="100%"
                 height="300"
                 style={{ border: 0 }}
@@ -259,7 +259,7 @@ const ContactSection = () => {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Monday - Friday</span>
-                  <span className="font-medium">11:00 AM - 9:00 PM</span>
+                  <span className="font-medium">10:00 AM - 8:00 PM</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Saturday - Sunday</span>

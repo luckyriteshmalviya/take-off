@@ -72,11 +72,11 @@ const TestimonialsSection = () => {
               </motion.div>
 
               {/* Rating */}
-              <div className="flex justify-center gap-1 mb-6">
+              {/* <div className="flex justify-center gap-1 mb-6">
                 {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 fill-accent text-accent" />
                 ))}
-              </div>
+              </div> */}
 
               {/* Quote */}
               <p className="text-lg md:text-xl text-foreground mb-8 italic leading-relaxed">

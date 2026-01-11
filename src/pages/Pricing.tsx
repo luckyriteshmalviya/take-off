@@ -8,7 +8,7 @@ const Pricing = () => {
     <div className="min-h-screen">
       <Header />
       <main>
-        <section className="pt-32 pb-10 gradient-hero relative overflow-hidden">
+        <section className="pt-32 pb-10 bg-black relative overflow-hidden">
           <div className="container-custom relative text-center text-primary-foreground">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}

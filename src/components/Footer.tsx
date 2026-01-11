@@ -7,7 +7,7 @@ const Footer = () => {
 
   const quickLinks = [
     { name: "Home", path: "/" },
-    { name: "About Us", path: "/about" },
+    // { name: "About Us", path: "/about" },
     { name: "Activities", path: "/activities" },
     { name: "Gallery", path: "/gallery" },
     { name: "Pricing", path: "/pricing" },
@@ -93,15 +93,15 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="text-background/70">
                 <span className="font-medium">Monday - Friday</span><br />
-                11:00 AM - 4:00 PM
-              </li>
-              <li className="text-background/70">
-                <span className="font-medium">Saturday - Sunday</span><br />
                 10:00 AM - 8:00 PM
               </li>
               <li className="text-background/70">
+                <span className="font-medium">Saturday - Sunday</span><br />
+                10:00 AM - 10:00 PM
+              </li>
+              <li className="text-background/70">
                 <span className="font-medium">Holidays</span><br />
-                10:00 AM - 9:00 PM
+                10:00 AM - 10:00 PM
               </li>
             </ul>
           </motion.div>
@@ -123,11 +123,11 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="tel:7415077577"
+                  href="tel:9111385771"
                   className="flex items-center gap-3 text-background/70 hover:text-primary transition-colors"
                 >
                   <Phone className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span>7415077577</span>
+                  <span>9111385771</span>
                 </a>
               </li>
               <li>
@@ -136,7 +136,10 @@ const Footer = () => {
                   className="flex items-center gap-3 text-background/70 hover:text-primary transition-colors"
                 >
                   <Mail className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span>info@takeoff.org.in</span>
+                  <p>info@takeoff.org.in
+                  <br/>
+                  director@takeoff.org.in</p>
+
                 </a>
               </li>
             </ul>

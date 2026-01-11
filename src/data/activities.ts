@@ -4,7 +4,10 @@ export interface Activity {
   description: string;
   icon: string;
   color: string;
+  image?: string;
 }
+
+import trampolineImage from "@/assets/restaurant-1.jpg";
 
 export const activities: Activity[] = [
   {
@@ -13,6 +16,7 @@ export const activities: Activity[] = [
     description: "Bounce at exciting angles and defy gravity on our angled trampolines!",
     icon: "🎢",
     color: "from-primary to-accent",
+    // image: trampolineImage,
   },
   {
     id: 2,

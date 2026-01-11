@@ -52,13 +52,22 @@ const PricingSection = () => {
             Simple & <span className="gradient-text">Affordable</span> Pricing
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Choose the perfect plan for your adventure. No hidden fees, just pure fun!
+            Choose the perfect plan for your adventure. No hidden fees, just
+            pure fun!
           </p>
         </motion.div>
 
         {/* Pricing Cards */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto"
+          className="
+    grid
+    grid-cols-1
+    md:grid-cols-[repeat(auto-fit,minmax(280px,1fr))]
+    gap-8
+    max-w-5xl
+    mx-auto
+    items-stretch
+  "
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -69,7 +78,7 @@ const PricingSection = () => {
               key={plan.id}
               variants={cardVariants}
               whileHover={{ y: -10 }}
-              className={`relative rounded-3xl p-8 ${
+              className={`relative rounded-3xl p-8 flex flex-col h-full ${
                 plan.popular
                   ? "bg-foreground text-background shadow-2xl scale-105"
                   : "bg-card shadow-card"
@@ -98,22 +107,30 @@ const PricingSection = () => {
               </motion.div>
 
               {/* Plan Name */}
-              <h3 className={`text-2xl font-heading font-bold text-center mb-2 ${
-                plan.popular ? "text-background" : "text-foreground"
-              }`}>
+              <h3
+                className={`text-2xl font-heading font-bold text-center mb-2 ${
+                  plan.popular ? "text-background" : "text-foreground"
+                }`}
+              >
                 {plan.name}
               </h3>
 
               {/* Price */}
               <div className="text-center mb-6">
-                <span className={`text-4xl font-heading font-bold ${
-                  plan.popular ? "text-primary" : "gradient-text"
-                }`}>
+                <span
+                  className={`text-4xl font-heading font-bold ${
+                    plan.popular ? "text-primary" : "gradient-text"
+                  }`}
+                >
                   {plan.price}
                 </span>
-                <span className={`text-sm block ${
-                  plan.popular ? "text-background/70" : "text-muted-foreground"
-                }`}>
+                <span
+                  className={`text-sm block ${
+                    plan.popular
+                      ? "text-background/70"
+                      : "text-muted-foreground"
+                  }`}
+                >
                   {plan.duration}
                 </span>
               </div>
@@ -122,12 +139,18 @@ const PricingSection = () => {
               <ul className="space-y-3 mb-8">
                 {plan.features.map((feature, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <Check className={`w-5 h-5 flex-shrink-0 ${
-                      plan.popular ? "text-primary" : "text-success"
-                    }`} />
-                    <span className={`text-sm ${
-                      plan.popular ? "text-background/80" : "text-muted-foreground"
-                    }`}>
+                    <Check
+                      className={`w-5 h-5 flex-shrink-0 ${
+                        plan.popular ? "text-primary" : "text-success"
+                      }`}
+                    />
+                    <span
+                      className={`text-sm ${
+                        plan.popular
+                          ? "text-background/80"
+                          : "text-muted-foreground"
+                      }`}
+                    >
                       {feature}
                     </span>
                   </li>
@@ -135,17 +158,19 @@ const PricingSection = () => {
               </ul>
 
               {/* CTA Button */}
-              <Link to="/contact">
-                <Button
-                  className={`w-full btn-bounce ${
-                    plan.popular
-                      ? "gradient-primary text-primary-foreground shadow-button"
-                      : "bg-foreground text-background hover:bg-foreground/90"
-                  }`}
-                >
-                  {plan.cta}
-                </Button>
-              </Link>
+              <div className="mt-auto pt-6">
+                <Link to="/contact">
+                  <Button
+                    className={`w-full btn-bounce ${
+                      plan.popular
+                        ? "gradient-primary text-primary-foreground shadow-button"
+                        : "bg-foreground text-background hover:bg-foreground/90"
+                    }`}
+                  >
+                    {plan.cta}
+                  </Button>
+                </Link>
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -157,10 +182,14 @@ const PricingSection = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          All prices include access to all activities & safety gear. 
-          <Link to="/contact" className="text-primary font-medium hover:underline ml-1">
+          All prices include access to all activities & safety gear.
+          <Link
+            to="/contact"
+            className="text-primary font-medium hover:underline ml-1"
+          >
             Contact us
-          </Link> for custom packages.
+          </Link>{" "}
+          for custom packages.
         </motion.p>
       </div>
     </section>

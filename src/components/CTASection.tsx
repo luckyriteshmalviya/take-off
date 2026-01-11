@@ -63,11 +63,11 @@ const CTASection = () => {
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
-            <a href="tel:7415077577">
+            <a href="tel:9111385771">
               <Button
                 size="lg"
                 variant="outline"
-                className="btn-bounce border-2 border-background text-background hover:bg-background/10 text-lg px-8 py-6"
+                className="btn-bounce border-2 border-background text-background text-black hover:bg-background/10 text-lg px-8 py-6"
               >
                 <Phone className="mr-2 w-5 h-5" />
                 Call Us

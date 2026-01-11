@@ -4,6 +4,28 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { X, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import trampoline1 from "@/assets/restaurant-1.jpg";
+import tramp2 from "@/assets/tram-2.jpg";
+import tramp3 from "@/assets/tramp-3.jpg";
+import tramp4 from "@/assets/tramp-4.jpg";
+import tramp5 from "@/assets/tramp-5.jpg";
+import tramp6 from "@/assets/tramp-6.jpg";
+import tramp7 from "@/assets/tramp-7.jpg";
+import tramp8 from "@/assets/tramp-8.jpg";
+import tramp9 from "@/assets/tramp-9.jpg";
+import tramp10 from "@/assets/tramp-10.jpg";
+import tramp11 from "@/assets/tramp-11.jpg";
+import thumbnail from "@/assets/thumbnail.jpg";
+import video1 from "@/assets/video_1.mp4";
+import video2 from "@/assets/video_2.mp4";
+import video3 from "@/assets/video_3.mp4";
+import video4 from "@/assets/video_4.mp4";
+import video5 from "@/assets/video_5.mp4";
+import video6 from "@/assets/video_6.mp4";
+import video7 from "@/assets/video_7.mp4";
+
+
+
 
 interface GalleryImage {
   id: number;
@@ -25,24 +47,28 @@ interface GalleryVideo {
 type GalleryItem = GalleryImage | GalleryVideo;
 
 const galleryImages: GalleryImage[] = [
-  { id: 1, type: "image", src: "https://images.unsplash.com/photo-1551524559-8af4e6624178?w=800", title: "Trampoline Zone", category: "activities" },
-  { id: 2, type: "image", src: "https://images.unsplash.com/photo-1535572290543-960a8046f5af?w=800", title: "Foam Pit Fun", category: "activities" },
-  { id: 3, type: "image", src: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800", title: "Birthday Celebration", category: "events" },
-  { id: 4, type: "image", src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800", title: "Group Outing", category: "events" },
-  { id: 5, type: "image", src: "https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800", title: "Wall Climbing", category: "activities" },
-  { id: 6, type: "image", src: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800", title: "Basketball Zone", category: "activities" },
-  { id: 7, type: "image", src: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800", title: "Kids Zone", category: "activities" },
-  { id: 8, type: "image", src: "https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=800", title: "Party Area", category: "events" },
-  { id: 9, type: "image", src: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800", title: "Active Fun", category: "activities" },
-  { id: 10, type: "image", src: "https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=800", title: "Bouncing Joy", category: "activities" },
-  { id: 11, type: "image", src: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=800", title: "Corporate Event", category: "events" },
-  { id: 12, type: "image", src: "https://images.unsplash.com/photo-1472162072942-cd5147eb3902?w=800", title: "Fun Time", category: "activities" },
+  { id: 1, type: "image", src: trampoline1, title: "Restaurant", category: "events" },
+  { id: 2, type: "image", src: tramp2, title: "Fun", category: "activities" },
+  { id: 3, type: "image", src: tramp3, title: "activity", category: "events" },
+  { id: 4, type: "image", src: tramp4, title: "Birthday Celebration", category: "events" },
+  { id: 5, type: "image", src: tramp6, title: "Parties", category: "activities" },
+  { id: 6, type: "image", src: tramp7, title: "", category: "activities" },
+  { id: 7, type: "image", src: tramp8, title: "Fun Zone", category: "activities" },
+  { id: 8, type: "image", src: tramp5, title: "Party Area", category: "events" },
+  { id: 9, type: "image", src: tramp9, title: "Active Fun", category: "activities" },
+  { id: 10, type: "image", src: tramp3, title: "Bouncing Joy", category: "activities" },
+  { id: 11, type: "image", src: tramp10, title: "Corporate Event", category: "events" },
+  { id: 12, type: "image", src: tramp11, title: "Fun Time", category: "activities" },
 ];
 
 const galleryVideos: GalleryVideo[] = [
-  { id: 101, type: "video", thumbnail: "https://images.unsplash.com/photo-1551524559-8af4e6624178?w=800", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Park Overview", category: "videos" },
-  { id: 102, type: "video", thumbnail: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Activities Highlight", category: "videos" },
-  { id: 103, type: "video", thumbnail: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Birthday Celebrations", category: "videos" },
+  { id: 101, type: "video", thumbnail: thumbnail, videoUrl: video1, title: "Park Overview", category: "videos" },
+  { id: 102, type: "video", thumbnail: thumbnail, videoUrl: video2, title: "Activities Highlight", category: "videos" },
+  { id: 103, type: "video", thumbnail: thumbnail, videoUrl: video3, title: "Activities Highlight", category: "videos" },
+  { id: 104, type: "video", thumbnail: thumbnail, videoUrl: video4, title: "Activities Highlight", category: "videos" },
+  { id: 105, type: "video", thumbnail: thumbnail, videoUrl: video5, title: "Activities Highlight", category: "videos" },
+  { id: 106, type: "video", thumbnail: thumbnail, videoUrl: video6, title: "Activities Highlight", category: "videos" },
+  { id: 107, type: "video", thumbnail: thumbnail, videoUrl: video7, title: "Activities Highlight", category: "videos" },
 ];
 
 const categories = ["all", "activities", "events", "videos"];
@@ -84,12 +110,12 @@ const Gallery = () => {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="pt-32 pb-20 gradient-hero relative overflow-hidden">
+        <section className="pt-32 pb-20 relative overflow-hidden bg-black">
           <div className="container-custom relative text-center text-primary-foreground">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6"
+              className="text-4xl  md:text-5xl lg:text-6xl font-heading font-bold mb-6"
             >
               Gallery 📸
             </motion.h1>

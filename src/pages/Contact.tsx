@@ -8,7 +8,7 @@ const Contact = () => {
     <div className="min-h-screen">
       <Header />
       <main>
-        <section className="pt-32 pb-10 gradient-hero relative overflow-hidden">
+        <section className="pt-32 pb-10 bg-black relative overflow-hidden">
           <div className="container-custom relative text-center text-primary-foreground">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
@@ -21,7 +21,7 @@ const Contact = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-lg md:text-xl max-w-3xl mx-auto opacity-90"
+              className="text-primary text-lg md:text-xl max-w-3xl mx-auto opacity-90"
             >
               Have questions? We'd love to hear from you!
             </motion.p>
