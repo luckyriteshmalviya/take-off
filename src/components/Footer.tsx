@@ -14,15 +14,6 @@ const Footer = () => {
     { name: "Contact", path: "/contact" },
   ];
 
-  const activities = [
-    "Inclined Trampoline",
-    "Foam Pit",
-    "Wall Climbing",
-    "Basketball",
-    "Body Zorbing",
-    "Spiral Slide",
-  ];
-
   const socialLinks = [
     { icon: Facebook, href: "#", label: "Facebook" },
     { icon: Instagram, href: "#", label: "Instagram" },
@@ -91,20 +82,27 @@ const Footer = () => {
             </ul>
           </motion.div>
 
-          {/* Activities */}
+          {/* Opening Hours */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <h4 className="text-lg font-heading font-bold mb-6 text-primary">Activities</h4>
+            <h4 className="text-lg font-heading font-bold mb-6 text-primary">Opening Hours</h4>
             <ul className="space-y-3">
-              {activities.map((activity) => (
-                <li key={activity}>
-                  <span className="text-background/70">{activity}</span>
-                </li>
-              ))}
+              <li className="text-background/70">
+                <span className="font-medium">Monday - Friday</span><br />
+                11:00 AM - 4:00 PM
+              </li>
+              <li className="text-background/70">
+                <span className="font-medium">Saturday - Sunday</span><br />
+                10:00 AM - 8:00 PM
+              </li>
+              <li className="text-background/70">
+                <span className="font-medium">Holidays</span><br />
+                10:00 AM - 9:00 PM
+              </li>
             </ul>
           </motion.div>
 

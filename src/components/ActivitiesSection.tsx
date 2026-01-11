@@ -28,14 +28,30 @@ const ActivitiesSection = () => {
     }
   };
 
+  // Smooth continuous scroll using requestAnimationFrame
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || !scrollRef.current) return;
     
-    const interval = setInterval(() => {
-      scroll("right");
-    }, 3000);
-
-    return () => clearInterval(interval);
+    let animationId: number;
+    const scrollSpeed = 1; // pixels per frame
+    
+    const smoothScroll = () => {
+      if (scrollRef.current) {
+        const container = scrollRef.current;
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        
+        if (container.scrollLeft >= maxScroll) {
+          container.scrollLeft = 0;
+        } else {
+          container.scrollLeft += scrollSpeed;
+        }
+      }
+      animationId = requestAnimationFrame(smoothScroll);
+    };
+    
+    animationId = requestAnimationFrame(smoothScroll);
+    
+    return () => cancelAnimationFrame(animationId);
   }, [isPaused]);
 
   const containerVariants = {
