@@ -6,115 +6,117 @@
 
 @layer base {
   :root {
-    /* Vibrant Red & Blue Trampoline Park Theme */
-    --background: 0 0% 100%;
-    --foreground: 220 25% 10%;
+    /* Electric Neon Trampoline Park Theme */
+    --background: 260 20% 98%;
+    --foreground: 260 50% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 25% 10%;
+    --card-foreground: 260 50% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 25% 10%;
+    --popover-foreground: 260 50% 10%;
 
-    /* Vibrant Red - Main Brand */
-    --primary: 0 85% 55%;
+    /* Electric Purple - Main Brand */
+    --primary: 270 95% 60%;
     --primary-foreground: 0 0% 100%;
 
-    /* Electric Blue - Secondary */
-    --secondary: 210 100% 50%;
+    /* Neon Cyan - Secondary */
+    --secondary: 175 100% 45%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Golden Yellow - Accent */
-    --accent: 45 100% 55%;
-    --accent-foreground: 220 25% 10%;
+    /* Hot Pink - Accent */
+    --accent: 330 100% 60%;
+    --accent-foreground: 0 0% 100%;
 
     /* Muted backgrounds */
-    --muted: 210 40% 96%;
-    --muted-foreground: 220 15% 40%;
+    --muted: 260 30% 95%;
+    --muted-foreground: 260 20% 40%;
 
-    /* Fun Purple for highlights */
-    --highlight: 280 85% 60%;
-    --highlight-foreground: 0 0% 100%;
+    /* Electric Yellow for highlights */
+    --highlight: 55 100% 55%;
+    --highlight-foreground: 260 50% 10%;
 
     /* Success Green */
-    --success: 145 80% 45%;
+    --success: 160 85% 45%;
     --success-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 20% 88%;
-    --input: 220 20% 88%;
-    --ring: 0 85% 55%;
+    --border: 260 20% 88%;
+    --input: 260 20% 88%;
+    --ring: 270 95% 60%;
 
     --radius: 1rem;
 
-    /* Gradients - Red & Blue Theme */
-    --gradient-primary: linear-gradient(135deg, hsl(0, 85%, 55%) 0%, hsl(0, 90%, 45%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(210, 100%, 50%) 0%, hsl(220, 100%, 45%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(0, 85%, 55%) 0%, hsl(340, 85%, 50%) 50%, hsl(210, 100%, 50%) 100%);
-    --gradient-fun: linear-gradient(135deg, hsl(45, 100%, 55%) 0%, hsl(0, 85%, 55%) 100%);
-    --gradient-cool: linear-gradient(135deg, hsl(210, 100%, 50%) 0%, hsl(180, 90%, 45%) 100%);
+    /* Neon Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(270, 95%, 60%) 0%, hsl(290, 90%, 55%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(175, 100%, 45%) 0%, hsl(190, 100%, 50%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(270, 95%, 55%) 0%, hsl(330, 100%, 60%) 50%, hsl(175, 100%, 45%) 100%);
+    --gradient-fun: linear-gradient(135deg, hsl(55, 100%, 55%) 0%, hsl(330, 100%, 60%) 100%);
+    --gradient-cool: linear-gradient(135deg, hsl(175, 100%, 45%) 0%, hsl(270, 95%, 60%) 100%);
+    --gradient-neon: linear-gradient(135deg, hsl(330, 100%, 60%) 0%, hsl(270, 95%, 60%) 50%, hsl(175, 100%, 45%) 100%);
 
-    /* Shadows */
-    --shadow-card: 0 10px 40px -10px hsla(0, 85%, 50%, 0.2);
-    --shadow-button: 0 8px 25px -5px hsla(0, 85%, 50%, 0.4);
-    --shadow-glow: 0 0 30px hsla(0, 85%, 55%, 0.3);
+    /* Neon Shadows */
+    --shadow-card: 0 10px 40px -10px hsla(270, 95%, 50%, 0.25);
+    --shadow-button: 0 8px 30px -5px hsla(270, 95%, 50%, 0.5);
+    --shadow-glow: 0 0 40px hsla(270, 95%, 60%, 0.4);
+    --shadow-neon: 0 0 20px hsla(330, 100%, 60%, 0.5), 0 0 40px hsla(270, 95%, 60%, 0.3);
 
     /* Sidebar */
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 220 25% 10%;
-    --sidebar-primary: 0 85% 55%;
+    --sidebar-background: 260 20% 98%;
+    --sidebar-foreground: 260 50% 10%;
+    --sidebar-primary: 270 95% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 45 100% 95%;
-    --sidebar-accent-foreground: 220 25% 10%;
-    --sidebar-border: 220 20% 90%;
-    --sidebar-ring: 0 85% 55%;
+    --sidebar-accent: 330 100% 95%;
+    --sidebar-accent-foreground: 260 50% 10%;
+    --sidebar-border: 260 20% 90%;
+    --sidebar-ring: 270 95% 60%;
   }
 
   .dark {
-    --background: 220 25% 8%;
+    --background: 260 30% 6%;
     --foreground: 0 0% 98%;
 
-    --card: 220 25% 12%;
+    --card: 260 30% 10%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 220 25% 12%;
+    --popover: 260 30% 10%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 0 85% 55%;
+    --primary: 270 95% 65%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 100% 50%;
+    --secondary: 175 100% 50%;
     --secondary-foreground: 0 0% 100%;
 
-    --accent: 45 100% 55%;
-    --accent-foreground: 220 25% 10%;
+    --accent: 330 100% 65%;
+    --accent-foreground: 0 0% 100%;
 
-    --muted: 220 25% 15%;
-    --muted-foreground: 220 15% 65%;
+    --muted: 260 30% 15%;
+    --muted-foreground: 260 15% 65%;
 
-    --highlight: 280 85% 60%;
-    --highlight-foreground: 0 0% 100%;
+    --highlight: 55 100% 55%;
+    --highlight-foreground: 260 50% 10%;
 
-    --success: 145 80% 45%;
+    --success: 160 85% 45%;
     --success-foreground: 0 0% 100%;
 
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 25% 20%;
-    --input: 220 25% 20%;
-    --ring: 0 85% 55%;
+    --border: 260 30% 20%;
+    --input: 260 30% 20%;
+    --ring: 270 95% 65%;
 
-    --sidebar-background: 220 25% 10%;
+    --sidebar-background: 260 30% 8%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 0 85% 55%;
+    --sidebar-primary: 270 95% 65%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 25% 15%;
+    --sidebar-accent: 260 30% 15%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 220 25% 18%;
-    --sidebar-ring: 0 85% 55%;
+    --sidebar-border: 260 30% 18%;
+    --sidebar-ring: 270 95% 65%;
   }
 }
 
@@ -172,6 +174,14 @@
 
   .shadow-glow {
     box-shadow: var(--shadow-glow);
+  }
+
+  .shadow-neon {
+    box-shadow: var(--shadow-neon);
+  }
+
+  .gradient-neon {
+    background-image: var(--gradient-neon);
   }
 
   /* Fun bouncy button effect */
