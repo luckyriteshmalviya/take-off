@@ -3,6 +3,26 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { activities } from "@/data/activities";
 
+// Dummy images for activities
+const activityImages = [
+  "https://images.unsplash.com/photo-1551524559-8af4e6624178?w=600",
+  "https://images.unsplash.com/photo-1535572290543-960a8046f5af?w=600",
+  "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600",
+  "https://images.unsplash.com/photo-1522163182402-834f871fd851?w=600",
+  "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600",
+  "https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=600",
+  "https://images.unsplash.com/photo-1472162072942-cd5147eb3902?w=600",
+  "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600",
+  "https://images.unsplash.com/photo-1551524559-8af4e6624178?w=600",
+  "https://images.unsplash.com/photo-1535572290543-960a8046f5af?w=600",
+  "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600",
+  "https://images.unsplash.com/photo-1522163182402-834f871fd851?w=600",
+  "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600",
+  "https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=600",
+  "https://images.unsplash.com/photo-1472162072942-cd5147eb3902?w=600",
+  "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600",
+];
+
 const Activities = () => {
   return (
     <div className="min-h-screen">
@@ -51,7 +71,16 @@ const Activities = () => {
                   whileHover={{ y: -10 }}
                   className="group cursor-pointer"
                 >
-                  <div className={`relative h-72 rounded-2xl overflow-hidden bg-gradient-to-br ${activity.color} shadow-card`}>
+                  <div className="relative h-80 rounded-2xl overflow-hidden shadow-card">
+                    {/* Image Background */}
+                    <img
+                      src={activityImages[index % activityImages.length]}
+                      alt={activity.title}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    {/* Gradient Overlay */}
+                    <div className={`absolute inset-0 bg-gradient-to-t ${activity.color} opacity-70 group-hover:opacity-80 transition-opacity`} />
+                    
                     {/* Content */}
                     <div className="absolute inset-0 p-6 flex flex-col justify-between text-primary-foreground">
                       <motion.span

@@ -142,28 +142,6 @@ const AboutSection = () => {
                 🎢
               </motion.div>
 
-              {/* Stats overlay */}
-              <motion.div
-                className="absolute bottom-0 left-0 right-0 glass rounded-2xl p-6 mx-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <div className="grid grid-cols-3 gap-4 text-center">
-                  <div>
-                    <p className="text-2xl font-heading font-bold text-primary">5+</p>
-                    <p className="text-xs text-muted-foreground">Years</p>
-                  </div>
-                  <div>
-                    <p className="text-2xl font-heading font-bold text-secondary">10K+</p>
-                    <p className="text-xs text-muted-foreground">Visitors</p>
-                  </div>
-                  <div>
-                    <p className="text-2xl font-heading font-bold text-accent">16+</p>
-                    <p className="text-xs text-muted-foreground">Activities</p>
-                  </div>
-                </div>
-              </motion.div>
             </div>
           </motion.div>
         </div>

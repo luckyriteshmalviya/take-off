@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+interface HeaderProps {
+  onOfferClick?: () => void;
+}
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -13,7 +17,7 @@ const navLinks = [
   { name: "Contact", path: "/contact" },
 ];
 
-const Header = () => {
+const Header = ({ onOfferClick }: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -78,6 +82,19 @@ const Header = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-3">
+            <button
+              onClick={onOfferClick}
+              className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors group"
+              aria-label="View Offers"
+            >
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                <Gift className="w-5 h-5 text-primary" />
+              </motion.div>
+              <span className="hidden lg:inline">Offers</span>
+            </button>
             <a href="tel:7415077577" className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
               <Phone className="w-4 h-4" />
               <span className="hidden lg:inline">7415077577</span>

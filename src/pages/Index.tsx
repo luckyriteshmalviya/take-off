@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
@@ -8,12 +9,18 @@ import PricingSection from "@/components/PricingSection";
 import FacilitiesSection from "@/components/FacilitiesSection";
 import ContactSection from "@/components/ContactSection";
 import CTASection from "@/components/CTASection";
-import FirstVisitPopup from "@/components/FirstVisitPopup";
+import FirstVisitPopup, { FirstVisitPopupRef } from "@/components/FirstVisitPopup";
 
 const Index = () => {
+  const popupRef = useRef<FirstVisitPopupRef>(null);
+
+  const handleOfferClick = () => {
+    popupRef.current?.openPopup();
+  };
+
   return (
     <div className="min-h-screen">
-      <Header />
+      <Header onOfferClick={handleOfferClick} />
       <main>
         <HeroSection />
         <AboutSection />
@@ -25,7 +32,7 @@ const Index = () => {
         <ContactSection />
       </main>
       <Footer />
-      <FirstVisitPopup />
+      <FirstVisitPopup ref={popupRef} />
     </div>
   );
 };
