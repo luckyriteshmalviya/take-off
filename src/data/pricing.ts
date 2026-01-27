@@ -18,7 +18,6 @@ export const pricingPlans: PricingPlan[] = [
     features: [
       // "2 hours of unlimited fun",
       "Access to all activities",
-      "Free grip socks",
       "Locker access included",
       "Safety briefing",
       "Buy one get one offer valid for limited time", "*Terms and conditions apply",
