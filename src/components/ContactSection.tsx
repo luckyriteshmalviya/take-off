@@ -9,9 +9,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Phone, Mail, MapPin, Send, CheckCircle } from "lucide-react";
 
+/* ---------------- VALIDATION ---------------- */
+
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(100),
-  mobile: z
+  phone: z
     .string()
     .regex(/^[6-9]\d{9}$/, "Please enter a valid 10-digit mobile number"),
   email: z.string().email("Please enter a valid email address"),
@@ -19,6 +21,8 @@ const contactSchema = z.object({
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
+
+/* ---------------- COMPONENT ---------------- */
 
 const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,24 +38,48 @@ const ContactSection = () => {
     resolver: zodResolver(contactSchema),
   });
 
+  /* -------- NETLIFY ENCODER -------- */
+  const encode = (data: Record<string, string>) =>
+    Object.keys(data)
+      .map(
+        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+      )
+      .join("&");
+
+  /* -------- FORM SUBMIT -------- */
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    toast({
-      title: "Message Sent! 🎉",
-      description: "We'll get back to you within 24 hours.",
-    });
 
-    reset();
-    
-    setTimeout(() => setIsSubmitted(false), 3000);
+    try {
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({
+          "form-name": "contact",
+          ...data,
+        }),
+      });
+
+      setIsSubmitted(true);
+      toast({
+        title: "Message Sent! 🎉",
+        description: "We'll get back to you within 24 hours.",
+      });
+
+      reset();
+      setTimeout(() => setIsSubmitted(false), 3000);
+    } catch (error) {
+      toast({
+        title: "Something went wrong ❌",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  /* ---------------- CONTACT INFO ---------------- */
 
   const contactInfo = [
     {
@@ -76,7 +104,7 @@ const ContactSection = () => {
 
   return (
     <section className="section-padding bg-muted relative overflow-hidden" id="contact">
-      {/* Decorative Background */}
+      {/* Background blobs */}
       <motion.div
         className="absolute top-20 -right-20 w-80 h-80 bg-primary/10 rounded-full blur-3xl"
         animate={{ scale: [1, 1.2, 1] }}
@@ -89,20 +117,14 @@ const ContactSection = () => {
       />
 
       <div className="container-custom relative">
-        {/* Section Header */}
+        {/* Header */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <motion.span
-            className="inline-block text-4xl mb-4"
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            📧
-          </motion.span>
+          <span className="inline-block text-4xl mb-4">📧</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4">
             Get In <span className="gradient-text">Touch</span>
           </h2>
@@ -112,7 +134,7 @@ const ContactSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Form */}
+          {/* FORM */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -123,42 +145,40 @@ const ContactSection = () => {
               Send Us a Message
             </h3>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <form
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              onSubmit={handleSubmit(onSubmit)}
+              className="space-y-6"
+            >
+              {/* Required for Netlify */}
+              <input type="hidden" name="form-name" value="contact" />
+              <input type="hidden" name="bot-field" />
+
               {/* Name */}
               <div>
                 <label className="block text-sm font-medium mb-2">Name</label>
-                <Input
-                  {...register("name")}
-                  placeholder="Your name"
-                  className={`${errors.name ? "border-destructive" : ""}`}
-                />
+                <Input {...register("name")} placeholder="Your name" />
                 {errors.name && (
                   <p className="text-destructive text-sm mt-1">{errors.name.message}</p>
                 )}
               </div>
 
-              {/* Mobile */}
+              {/* Phone */}
               <div>
                 <label className="block text-sm font-medium mb-2">Mobile Number</label>
-                <Input
-                  {...register("mobile")}
-                  placeholder="10-digit mobile number"
-                  className={`${errors.mobile ? "border-destructive" : ""}`}
-                />
-                {errors.mobile && (
-                  <p className="text-destructive text-sm mt-1">{errors.mobile.message}</p>
+                <Input {...register("phone")} placeholder="10-digit mobile number" />
+                {errors.phone && (
+                  <p className="text-destructive text-sm mt-1">{errors.phone.message}</p>
                 )}
               </div>
 
               {/* Email */}
               <div>
                 <label className="block text-sm font-medium mb-2">Email</label>
-                <Input
-                  {...register("email")}
-                  type="email"
-                  placeholder="your@email.com"
-                  className={`${errors.email ? "border-destructive" : ""}`}
-                />
+                <Input {...register("email")} type="email" placeholder="your@email.com" />
                 {errors.email && (
                   <p className="text-destructive text-sm mt-1">{errors.email.message}</p>
                 )}
@@ -167,23 +187,14 @@ const ContactSection = () => {
               {/* Message */}
               <div>
                 <label className="block text-sm font-medium mb-2">Message</label>
-                <Textarea
-                  {...register("message")}
-                  placeholder="Tell us about your enquiry..."
-                  rows={4}
-                  className={`${errors.message ? "border-destructive" : ""}`}
-                />
+                <Textarea {...register("message")} rows={4} placeholder="Tell us about your enquiry..." />
                 {errors.message && (
                   <p className="text-destructive text-sm mt-1">{errors.message.message}</p>
                 )}
               </div>
 
-              {/* Submit Button */}
-              <Button
-                type="submit"
-                disabled={isSubmitting || isSubmitted}
-                className="w-full btn-bounce gradient-primary text-primary-foreground shadow-button"
-              >
+              {/* Submit */}
+              <Button type="submit" disabled={isSubmitting || isSubmitted} className="w-full">
                 {isSubmitting ? (
                   <motion.div
                     animate={{ rotate: 360 }}
@@ -205,38 +216,23 @@ const ContactSection = () => {
             </form>
           </motion.div>
 
-          {/* Contact Info & Map */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            {/* Contact Cards */}
+          {/* CONTACT INFO */}
+          <motion.div className="space-y-8">
             <div className="grid gap-4">
-              {contactInfo.map((item, index) => (
-                <motion.a
-                  key={item.title}
-                  href={item.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ x: 10 }}
-                  className="flex items-center gap-4 p-4 bg-card rounded-xl shadow-sm hover:shadow-card transition-all group"
-                >
-                  <div className="w-12 h-12 rounded-full gradient-primary flex items-center justify-center group-hover:scale-110 transition-transform">
+              {contactInfo.map((item, i) => (
+                <a key={i} href={item.href} className="flex items-center gap-4 p-4 bg-card rounded-xl shadow-sm">
+                  <div className="w-12 h-12 rounded-full gradient-primary flex items-center justify-center">
                     <item.icon className="w-6 h-6 text-primary-foreground" />
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">{item.title}</p>
                     <p className="font-medium text-foreground">{item.value}</p>
                   </div>
-                </motion.a>
+                </a>
               ))}
             </div>
 
-            {/* Google Map */}
+            {/* Map */}
             <div className="rounded-2xl overflow-hidden shadow-card" id="map">
               <iframe
                 src="https://www.google.com/maps?q=23.16084776391898,77.46618011291046&z=15&output=embed"
@@ -245,31 +241,9 @@ const ContactSection = () => {
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
                 title="Take Off Trampoline Park Location"
                 className="w-full"
               />
-            </div>
-
-            {/* Operating Hours */}
-            <div className="bg-card rounded-xl p-6 shadow-sm">
-              <h4 className="font-heading font-bold mb-4 flex items-center gap-2">
-                <span>🕐</span> Operating Hours
-              </h4>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Monday - Friday</span>
-                  <span className="font-medium">10:00 AM - 8:00 PM</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Saturday - Sunday</span>
-                  <span className="font-medium">10:00 AM - 10:00 PM</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Holidays</span>
-                  <span className="font-medium">10:00 AM - 10:00 PM</span>
-                </div>
-              </div>
             </div>
           </motion.div>
         </div>

@@ -92,16 +92,20 @@ const Footer = () => {
             <h4 className="text-lg font-heading font-bold mb-6 text-primary">Opening Hours</h4>
             <ul className="space-y-3">
               <li className="text-background/70">
-                <span className="font-medium">Monday - Friday</span><br />
-                10:00 AM - 8:00 PM
+                <span className="font-medium">Monday</span><br />
+                11:30 AM - 9:00 PM
+              </li>
+               <li className="text-background/70">
+                <span className="font-medium">Tuesday - Friday</span><br />
+                11:00 AM - 9:00 PM
               </li>
               <li className="text-background/70">
                 <span className="font-medium">Saturday - Sunday</span><br />
-                10:00 AM - 10:00 PM
+                11:00 AM - 9:30 PM
               </li>
               <li className="text-background/70">
                 <span className="font-medium">Holidays</span><br />
-                10:00 AM - 10:00 PM
+                11:00 AM - 9:30 PM
               </li>
             </ul>
           </motion.div>

@@ -76,7 +76,7 @@ const FirstVisitPopup = forwardRef<FirstVisitPopupRef>((_, ref) => {
               </div>
 
               <div className="px-4 text-sm text-muted-foreground">
-                Offer extended to January 🎉
+                Offer extended to 15 Feb 🎉
               </div>
               <div className="px-4 text-sm text-muted-foreground">
                 Note :- Valid only for weekdays (Mon - Fri)

@@ -49,7 +49,6 @@ export const pricingPlans: PricingPlan[] = [
     price: "Custom",
     duration: "tailored package",
     features: [
-      "Half/Full day options",
       "Exclusive access available",
       "Meeting room included",
       "Catering options",
