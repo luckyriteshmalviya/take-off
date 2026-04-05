@@ -17,14 +17,14 @@ const FirstVisitPopup = forwardRef<FirstVisitPopupRef, FirstVisitPopupProps>(({ 
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  // 🔥 Open popup on every page refresh
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsOpen(true);
-    }, 1500); // slight delay for better UX
-
-    return () => clearTimeout(timer);
-  }, []);
+  // Not required right now
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsOpen(true);
+  //   }, 1500); // slight delay for better UX
+  //
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   useImperativeHandle(ref, () => ({
     openPopup: () => setIsOpen(true),
