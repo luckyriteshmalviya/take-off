@@ -156,12 +156,15 @@ const Footer = () => {
             <p className="text-background/60 text-sm text-center md:text-left">
               © {currentYear} Take Off Trampoline Park. All rights reserved.
             </p>
-            <div className="flex gap-6 text-sm">
-              <Link to="#" className="text-background/60 hover:text-primary transition-colors">
+            <div className="flex flex-wrap gap-4 sm:gap-6 text-sm">
+              <Link to="/privacy-policy" className="text-background/60 hover:text-primary transition-colors">
                 Privacy Policy
               </Link>
-              <Link to="#" className="text-background/60 hover:text-primary transition-colors">
+              <Link to="/terms-and-conditions" className="text-background/60 hover:text-primary transition-colors">
                 Terms of Service
+              </Link>
+              <Link to="/refund-policy" className="text-background/60 hover:text-primary transition-colors">
+                Refund Policy
               </Link>
             </div>
           </div>

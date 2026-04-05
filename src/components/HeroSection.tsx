@@ -30,7 +30,11 @@ const LaunchParticles = () => {
   );
 };
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onBookNow?: () => void;
+}
+
+const HeroSection = ({ onBookNow }: HeroSectionProps) => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-black via-slate-900 to-black">
       
@@ -95,6 +99,7 @@ const HeroSection = () => {
         >
           <Button
             size="lg"
+            onClick={onBookNow}
             className="px-10 py-6 text-lg font-bold bg-accent hover:bg-accent/90"
           >
             Book Your Jump

@@ -4,7 +4,11 @@ import { Check, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
-const PricingSection = () => {
+interface PricingSectionProps {
+  onBookNow?: () => void;
+}
+
+const PricingSection = ({ onBookNow }: PricingSectionProps) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -159,17 +163,16 @@ const PricingSection = () => {
 
               {/* CTA Button */}
               <div className="mt-auto pt-6">
-                <Link to="/contact">
-                  <Button
-                    className={`w-full btn-bounce ${
-                      plan.popular
-                        ? "gradient-primary text-primary-foreground shadow-button"
-                        : "bg-foreground text-background hover:bg-foreground/90"
-                    }`}
-                  >
-                    {plan.cta}
-                  </Button>
-                </Link>
+                <Button
+                  onClick={onBookNow}
+                  className={`w-full btn-bounce ${
+                    plan.popular
+                      ? "gradient-primary text-primary-foreground shadow-button"
+                      : "bg-foreground text-background hover:bg-foreground/90"
+                  }`}
+                >
+                  {plan.cta}
+                </Button>
               </div>
             </motion.div>
           ))}

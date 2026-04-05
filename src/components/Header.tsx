@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 
 interface HeaderProps {
   onOfferClick?: () => void;
+  onBookNow?: () => void;
 }
 
 const navLinks = [
@@ -17,7 +18,7 @@ const navLinks = [
   { name: "Contact", path: "/contact" },
 ];
 
-const Header = ({ onOfferClick }: HeaderProps) => {
+const Header = ({ onOfferClick, onBookNow }: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -99,7 +100,7 @@ const Header = ({ onOfferClick }: HeaderProps) => {
               <Phone className="w-4 h-4" />
               <span className="hidden lg:inline">9111385771</span>
             </a>
-            <Button className="btn-bounce gradient-primary text-primary-foreground shadow-button">
+            <Button onClick={onBookNow} className="btn-bounce gradient-primary text-primary-foreground shadow-button">
               Book Now
             </Button>
           </div>
@@ -157,7 +158,7 @@ const Header = ({ onOfferClick }: HeaderProps) => {
                   <Phone className="w-5 h-5 text-primary" />
                   <span className="text-primary">9111385771</span>
                 </a>
-                <Button className="w-full gradient-primary text-primary-foreground">
+                <Button onClick={onBookNow} className="w-full gradient-primary text-primary-foreground">
                   Book Now
                 </Button>
               </motion.div>

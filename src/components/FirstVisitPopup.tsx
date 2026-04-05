@@ -9,7 +9,11 @@ export interface FirstVisitPopupRef {
   openPopup: () => void;
 }
 
-const FirstVisitPopup = forwardRef<FirstVisitPopupRef>((_, ref) => {
+interface FirstVisitPopupProps {
+  onBookNow?: () => void;
+}
+
+const FirstVisitPopup = forwardRef<FirstVisitPopupRef, FirstVisitPopupProps>(({ onBookNow }, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -30,9 +34,13 @@ const FirstVisitPopup = forwardRef<FirstVisitPopupRef>((_, ref) => {
     setIsOpen(false);
   };
 
-  const redirectToPricing = () => {
+  const handleBookNow = () => {
     setIsOpen(false);
-    navigate("/pricing");
+    if (onBookNow) {
+      onBookNow();
+    } else {
+      navigate("/pricing");
+    }
   };
 
   return (
@@ -87,7 +95,7 @@ const FirstVisitPopup = forwardRef<FirstVisitPopupRef>((_, ref) => {
               <div className="p-6 bg-gradient-to-t from-card to-card/80">
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button
-                    onClick={redirectToPricing}
+                    onClick={handleBookNow}
                     className="flex-1 btn-bounce gradient-primary shadow-button text-lg py-6"
                   >
                     Book Now 🎉

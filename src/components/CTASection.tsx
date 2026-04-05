@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Phone, ArrowRight } from "lucide-react";
 
-const CTASection = () => {
+interface CTASectionProps {
+  onBookNow?: () => void;
+}
+
+const CTASection = ({ onBookNow }: CTASectionProps) => {
   return (
     <section className="relative py-20 overflow-hidden">
       {/* Background */}
@@ -54,15 +58,14 @@ const CTASection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link to="/contact">
-              <Button
-                size="lg"
-                className="btn-bounce bg-background text-primary hover:bg-background/90 shadow-button text-lg px-8 py-6 font-bold"
-              >
-                Book Now
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
+            <Button
+              size="lg"
+              onClick={onBookNow}
+              className="btn-bounce bg-background text-primary hover:bg-background/90 shadow-button text-lg px-8 py-6 font-bold"
+            >
+              Book Now
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
             <a href="tel:9111385771">
               <Button
                 size="lg"
