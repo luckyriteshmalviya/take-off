@@ -1,5 +1,7 @@
 import type { Handler, HandlerEvent } from "@netlify/functions";
 import Razorpay from "razorpay";
+import { GoogleSpreadsheet } from "google-spreadsheet";
+import { JWT } from "google-auth-library";
 
 // Fail fast if keys are not configured
 if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
@@ -24,7 +26,8 @@ interface OrderRequestBody {
   customerPhone: string;
   numberOfPersons: number;
   visitDate: string;       // "YYYY-MM-DD"
-  pricePerPerson: number;  // 800 (weekday) or 1000 (weekend/holiday) — server re-validates this
+  pricePerPerson: number;  // Base price
+  couponCode?: string;     // Optional coupon code
 }
 
 // ── Holiday configuration (keep in sync with src/lib/pricing.ts) ─────
@@ -41,15 +44,10 @@ const holidayConfig: Record<number, string[]> = {
     "2026-12-25",
     "2026-12-31",
   ],
-  // 2027: ["2027-01-01", "2027-12-25"]
 };
 
 const holidaySet = new Set(Object.values(holidayConfig).flat());
 
-/**
- * Server-side price validation.
- * Saturday (6), Sunday (0), or holidays cost ₹1000/person; weekdays cost ₹800/person.
- */
 const getExpectedPricePerPerson = (dateStr: string): number => {
   if (holidaySet.has(dateStr)) return 1000;
   const [yyyy, mm, dd] = dateStr.split("-").map(Number);
@@ -58,13 +56,74 @@ const getExpectedPricePerPerson = (dateStr: string): number => {
   return day === 0 || day === 6 ? 1000 : 800;
 };
 
-/** Returns "Holiday" | "Weekend" | "Weekday" */
 const getDayType = (dateStr: string): string => {
   if (holidaySet.has(dateStr)) return "Holiday";
   const [yyyy, mm, dd] = dateStr.split("-").map(Number);
   const date = new Date(yyyy, mm - 1, dd);
   const day = date.getDay();
   return day === 0 || day === 6 ? "Weekend" : "Weekday";
+};
+
+// --- Google Sheets Helper ---
+const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+let doc: GoogleSpreadsheet | null = null;
+
+const getDoc = async () => {
+  if (!doc) {
+    if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || !privateKey || !process.env.GOOGLE_SHEET_ID) {
+      throw new Error("Google Sheets environment variables are missing.");
+    }
+    const serviceAccountAuth = new JWT({
+      email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      key: privateKey,
+      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+    });
+    doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID, serviceAccountAuth);
+  }
+  return doc;
+};
+
+const validateCoupon = async (code: string, baseTotal: number, numberOfPersons: number): Promise<{ isValid: boolean; discountAmount: number; finalTotal: number }> => {
+  try {
+    const document = await getDoc();
+    await document.loadInfo();
+    const sheet = document.sheetsByTitle["Coupons"];
+    if (!sheet) return { isValid: false, discountAmount: 0, finalTotal: baseTotal };
+
+    const rows = await sheet.getRows();
+    const matchingRow = rows.find(row => row.get("Code")?.trim().toUpperCase() === code.trim().toUpperCase());
+
+    if (!matchingRow) return { isValid: false, discountAmount: 0, finalTotal: baseTotal };
+
+    const isActive = matchingRow.get("IsActive")?.trim().toLowerCase() === "yes";
+    if (!isActive) return { isValid: false, discountAmount: 0, finalTotal: baseTotal };
+
+    const type = matchingRow.get("Type")?.trim().toLowerCase(); // "percentage" or "flat"
+    const amount = parseFloat(matchingRow.get("Amount") || "0");
+
+    let finalTotal = baseTotal;
+    let discountAmount = 0;
+
+    if (type === "percentage") {
+      discountAmount = (baseTotal * amount) / 100;
+      finalTotal = baseTotal - discountAmount;
+    } else if (type === "flat") {
+      discountAmount = amount;
+      finalTotal = baseTotal - discountAmount;
+    } else if (type === "fixed") {
+      // Amount represents the new price per person
+      finalTotal = amount * numberOfPersons;
+      discountAmount = baseTotal - finalTotal;
+    }
+
+    if (finalTotal < 0) finalTotal = 0;
+
+    return { isValid: true, discountAmount, finalTotal };
+
+  } catch (err) {
+    console.error("Error validating coupon:", err);
+    return { isValid: false, discountAmount: 0, finalTotal: baseTotal };
+  }
 };
 
 const handler: Handler = async (event: HandlerEvent) => {
@@ -84,20 +143,12 @@ const handler: Handler = async (event: HandlerEvent) => {
   }
 
   if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      headers,
-      body: JSON.stringify({ error: "Method not allowed" }),
-    };
+    return { statusCode: 405, headers, body: JSON.stringify({ error: "Method not allowed" }) };
   }
 
   try {
     if (!event.body) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ error: "Request body is required" }),
-      };
+      return { statusCode: 400, headers, body: JSON.stringify({ error: "Request body is required" }) };
     }
 
     const {
@@ -106,43 +157,43 @@ const handler: Handler = async (event: HandlerEvent) => {
       customerPhone,
       numberOfPersons,
       visitDate,
+      couponCode,
     }: OrderRequestBody = JSON.parse(event.body);
 
-    // Validation
     if (!customerName || !customerEmail || !numberOfPersons) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ error: "Missing required fields" }),
-      };
+      return { statusCode: 400, headers, body: JSON.stringify({ error: "Missing required fields" }) };
     }
 
     if (numberOfPersons < 1 || numberOfPersons > 20) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({
-          error: "Number of persons must be between 1 and 20",
-        }),
-      };
+      return { statusCode: 400, headers, body: JSON.stringify({ error: "Number of persons must be between 1 and 20" }) };
     }
 
     if (!visitDate || !/^\d{4}-\d{2}-\d{2}$/.test(visitDate)) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ error: "A valid visit date is required (YYYY-MM-DD)" }),
-      };
+      return { statusCode: 400, headers, body: JSON.stringify({ error: "A valid visit date is required (YYYY-MM-DD)" }) };
     }
 
-    // Server-side price determination — prevents client-side price manipulation
     const expectedPrice = getExpectedPricePerPerson(visitDate);
-    const pricePerPersonPaise = expectedPrice * 100; // convert ₹ to paise
-    const totalAmount = numberOfPersons * pricePerPersonPaise;
+    const baseTotal = numberOfPersons * expectedPrice;
+    
+    // Apply Coupon Logic
+    let finalTotal = baseTotal;
+    let appliedCoupon = null;
 
-    // Create Razorpay order
+    if (couponCode) {
+      const couponResult = await validateCoupon(couponCode, baseTotal, numberOfPersons);
+      if (couponResult.isValid) {
+        finalTotal = couponResult.finalTotal;
+        appliedCoupon = couponCode;
+      } else {
+        // Reject the order if they sent a coupon code but it was invalid (prevents checkout bypass)
+        return { statusCode: 400, headers, body: JSON.stringify({ error: "Invalid or expired coupon code" }) };
+      }
+    }
+
+    const totalAmountPaise = Math.round(finalTotal * 100);
+
     const order = await razorpay.orders.create({
-      amount: totalAmount,
+      amount: totalAmountPaise,
       currency: "INR",
       receipt: `takeoff_${Date.now()}`,
       notes: {
@@ -151,8 +202,10 @@ const handler: Handler = async (event: HandlerEvent) => {
         customerPhone,
         numberOfPersons: numberOfPersons.toString(),
         visitDate,
-        pricePerPerson: expectedPrice.toString(),
+        basePricePerPerson: expectedPrice.toString(),
         dayType: getDayType(visitDate),
+        couponCode: appliedCoupon || "None",
+        discountAmount: couponCode ? (baseTotal - finalTotal).toString() : "0"
       },
     });
 
@@ -168,13 +221,10 @@ const handler: Handler = async (event: HandlerEvent) => {
     };
   } catch (error: unknown) {
     console.error("Razorpay order creation error:", error);
-
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({
-        error: "Unable to create order. Please try again.",
-      }),
+      body: JSON.stringify({ error: "Unable to create order. Please try again." }),
     };
   }
 };

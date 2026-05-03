@@ -1,0 +1,6 @@
+Code,Type,Amount,IsActive,ShowBanner,BannerMessage
+OFFER50,percentage,50,Yes,Yes,🔥 Buy 1 Get 1 Free! Use code OFFER50 at checkout!
+SPECIAL500,fixed,500,No,No,🎟️ Weekday Special! Entry for just ₹500. Use code SPECIAL500
+FESTIVE700,fixed,700,No,No,✨ Festive Discount! Save ₹100 per ticket with code FESTIVE700
+SUMMER20,percentage,20,No,No,☀️ Summer Holidays! 20% off all bookings with SUMMER20
+VIP1000,fixed,0,No,No,

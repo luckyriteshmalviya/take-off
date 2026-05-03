@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
@@ -9,16 +9,12 @@ import PricingSection from "@/components/PricingSection";
 import FacilitiesSection from "@/components/FacilitiesSection";
 import ContactSection from "@/components/ContactSection";
 import CTASection from "@/components/CTASection";
-import FirstVisitPopup, { FirstVisitPopupRef } from "@/components/FirstVisitPopup";
 import BookingModal from "@/components/BookingModal";
+import OffersModal from "@/components/OffersModal";
 
 const Index = () => {
-  const popupRef = useRef<FirstVisitPopupRef>(null);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
-
-  const handleOfferClick = () => {
-    popupRef.current?.openPopup();
-  };
+  const [isOffersOpen, setIsOffersOpen] = useState(false);
 
   const handleBookNow = () => {
     setIsBookingOpen(true);
@@ -26,7 +22,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      <Header onOfferClick={handleOfferClick} onBookNow={handleBookNow} />
+      <Header onOfferClick={() => setIsOffersOpen(true)} onBookNow={handleBookNow} />
       <main>
         <HeroSection onBookNow={handleBookNow} />
         <AboutSection />
@@ -38,7 +34,7 @@ const Index = () => {
         <ContactSection />
       </main>
       <Footer />
-      <FirstVisitPopup ref={popupRef} onBookNow={handleBookNow} />
+      <OffersModal isOpen={isOffersOpen} onClose={() => setIsOffersOpen(false)} onBookNow={handleBookNow} />
       <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
     </div>
   );

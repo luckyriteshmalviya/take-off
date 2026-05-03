@@ -58,6 +58,8 @@
         "npm:eslint@^9.32.0",
         "npm:framer-motion@^12.25.0",
         "npm:globals@^15.15.0",
+        "npm:google-auth-library@^10.6.2",
+        "npm:google-spreadsheet@^5.2.0",
         "npm:html2canvas@^1.4.1",
         "npm:input-otp@^1.4.2",
         "npm:jspdf@^4.2.0",

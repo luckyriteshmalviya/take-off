@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AnnouncementBanner } from "@/components/AnnouncementBanner";
 
 interface HeaderProps {
   onOfferClick?: () => void;
@@ -23,6 +24,14 @@ const Header = ({ onOfferClick, onBookNow }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
+  const handleBookClick = () => {
+    if (onBookNow) {
+      onBookNow();
+    } else {
+      window.dispatchEvent(new Event("open-booking-modal"));
+    }
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -37,13 +46,11 @@ const Header = ({ onOfferClick, onBookNow }: HeaderProps) => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "glass shadow-lg py-2"
-          : "bg-transparent py-4"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 flex flex-col`}
     >
-      <div className="container-custom">
+      <AnnouncementBanner />
+      <div className={`w-full transition-all duration-300 ${isScrolled ? "glass shadow-lg py-2" : "bg-transparent py-4"}`}>
+        <div className="container-custom">
         <nav className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
@@ -100,7 +107,7 @@ const Header = ({ onOfferClick, onBookNow }: HeaderProps) => {
               <Phone className="w-4 h-4" />
               <span className="hidden lg:inline">9111385771</span>
             </a>
-            <Button onClick={onBookNow} className="btn-bounce gradient-primary text-primary-foreground shadow-button">
+            <Button onClick={handleBookClick} className="btn-bounce gradient-primary text-primary-foreground shadow-button">
               Book Now
             </Button>
           </div>
@@ -114,6 +121,7 @@ const Header = ({ onOfferClick, onBookNow }: HeaderProps) => {
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </nav>
+      </div>
       </div>
 
       {/* Mobile Menu */}
@@ -158,7 +166,7 @@ const Header = ({ onOfferClick, onBookNow }: HeaderProps) => {
                   <Phone className="w-5 h-5 text-primary" />
                   <span className="text-primary">9111385771</span>
                 </a>
-                <Button onClick={onBookNow} className="w-full gradient-primary text-primary-foreground">
+                <Button onClick={handleBookClick} className="w-full gradient-primary text-primary-foreground">
                   Book Now
                 </Button>
               </motion.div>
