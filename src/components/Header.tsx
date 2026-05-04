@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import logoImg from "@/assets/logo.png";
 import { Menu, X, Phone, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnnouncementBanner } from "@/components/AnnouncementBanner";
@@ -55,11 +56,10 @@ const Header = ({ onOfferClick, onBookNow }: HeaderProps) => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <motion.div
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.5 }}
-              className="text-3xl"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
             >
-              🎪
+              <img src={logoImg} alt="Take Off Logo" className="w-10 h-10 object-contain rounded-md" />
             </motion.div>
             <div>
               <h1 className="text-xl md:text-2xl font-heading font-bold text-primary">

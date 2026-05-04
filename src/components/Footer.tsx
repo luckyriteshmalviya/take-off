@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import logoImg from "@/assets/logo.png";
 import { Phone, Mail, MapPin, Facebook, Instagram, Youtube, Twitter } from "lucide-react";
 
 const Footer = () => {
@@ -37,7 +38,7 @@ const Footer = () => {
             viewport={{ once: true }}
           >
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <span className="text-4xl">🎪</span>
+              <img src={logoImg} alt="Take Off Logo" className="w-12 h-12 object-contain rounded-md" />
               <div>
                 <h3 className="text-2xl font-heading font-bold text-primary">Take Off</h3>
                 <p className="text-xs text-background/60">Trampoline Park</p>

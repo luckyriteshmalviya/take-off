@@ -240,6 +240,8 @@ const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
           persons: formData.numberOfPersons.toString(),
           date: visitDate ? toDateString(visitDate) : "",
           price_per_person: pricePerPerson.toString(),
+          ...(discountAmount > 0 ? { discount: discountAmount.toString() } : {}),
+          ...(appliedCoupon ? { coupon: appliedCoupon } : {})
         });
         navigate(`/payment-success?${params.toString()}`);
       } else {

@@ -3,6 +3,7 @@ import { CheckCircle, ArrowLeft, PartyPopper, Camera, Copy, Check, Download, Cal
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import logoImg from "@/assets/logo.png";
 
 import { useToast } from "@/hooks/use-toast";
 import { getDayTypeFromString } from "@/lib/pricing";
@@ -31,6 +32,8 @@ const PaymentSuccess = () => {
   const persons = searchParams.get("persons");
   const visitDate = searchParams.get("date");
   const pricePerPerson = searchParams.get("price_per_person");
+  const discountAmount = searchParams.get("discount");
+  const appliedCoupon = searchParams.get("coupon");
 
   const [copied, setCopied] = useState(false);
   const [downloading, setDownloading] = useState(false);
@@ -91,7 +94,7 @@ const PaymentSuccess = () => {
 </style></head><body>
 <div class="t"><div class="bar"></div>
 <div class="hdr">
-  <div class="brand"><span style="font-size:34px">🎪</span><div><div class="bn">Take-off</div><div class="bs">Trampoline Park</div></div></div>
+  <div class="brand"><img src="${logoImg}" alt="Take-off Logo" style="width:40px;height:40px;object-fit:contain;border-radius:8px;" crossorigin="anonymous"/><div><div class="bn">Take-off</div><div class="bs">Trampoline Park</div></div></div>
   <div style="text-align:right"><div class="badge">Entry Pass</div><div class="iss">Issued: ${transactionDate}</div></div>
 </div>
 <div class="grid">
@@ -102,8 +105,9 @@ const PaymentSuccess = () => {
   </div>
   <div class="box">
     <div class="row"><span class="lbl">Status</span><span class="paid">PAID</span></div>
-    <div class="row"><span class="lbl">Rate</span><span style="font-size:11px;font-weight:700;color:#111">₹${pricePerPerson ?? "800"}/person</span></div>
-    <div class="row"><span class="lbl">Total</span><span class="tot">₹${amount ?? "0"}</span></div>
+    <div class="row"><span class="lbl">Base Amount</span><span style="font-size:11px;font-weight:700;color:#111">₹${(Number(persons || 1) * Number(pricePerPerson || 800))}</span></div>
+    ${discountAmount ? `<div class="row"><span class="lbl">Discount ${appliedCoupon ? `(${appliedCoupon})` : ''}</span><span style="font-size:11px;font-weight:700;color:#166534">-₹${discountAmount}</span></div>` : ""}
+    <div style="border-top:1px solid #e5e7eb;margin-top:4px;padding-top:8px;" class="row"><span class="lbl">Total Paid</span><span class="tot">₹${amount ?? "0"}</span></div>
   </div>
 </div>
 <div class="pid"><div class="plbl">Booking Reference (Payment ID)</div><div class="pval">${paymentId ?? "N/A"}</div></div>
@@ -156,7 +160,7 @@ const PaymentSuccess = () => {
             <div style="position:absolute;top:0;left:0;width:100%;height:10px;background:#111;border-radius:14px 14px 0 0;"></div>
             <div style="display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #e5e7eb;padding-bottom:18px;margin-bottom:20px;margin-top:8px;">
               <div style="display:flex;align-items:center;gap:10px;">
-                <span style="font-size:34px;">&#127914;</span>
+                <img src="${logoImg}" alt="Take-off Logo" style="width:40px;height:40px;object-fit:contain;border-radius:8px;" crossorigin="anonymous" />
                 <div>
                   <div style="font-size:26px;font-weight:900;color:#111;line-height:1;">Take-off</div>
                   <div style="font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:.2em;text-transform:uppercase;">Trampoline Park</div>
@@ -190,11 +194,16 @@ const PaymentSuccess = () => {
                   <span style="background:#dcfce7;color:#166534;padding:2px 10px;border-radius:99px;font-size:10px;font-weight:800;">PAID</span>
                 </div>
                 <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e5e7eb;padding-top:8px;">
-                  <span style="font-size:9px;color:#9ca3af;font-weight:700;text-transform:uppercase;">Rate</span>
-                  <span style="font-size:11px;font-weight:700;color:#111;">&#8377;${pricePerPerson ?? "800"}/person</span>
+                  <span style="font-size:9px;color:#9ca3af;font-weight:700;text-transform:uppercase;">Base Amount</span>
+                  <span style="font-size:11px;font-weight:700;color:#111;">&#8377;${(Number(persons || 1) * Number(pricePerPerson || 800))}</span>
                 </div>
+                ${discountAmount ? `
                 <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e5e7eb;padding-top:8px;">
-                  <span style="font-size:9px;color:#9ca3af;font-weight:700;text-transform:uppercase;">Total Amount</span>
+                  <span style="font-size:9px;color:#166534;font-weight:700;text-transform:uppercase;">Discount ${appliedCoupon ? `(${appliedCoupon})` : ''}</span>
+                  <span style="font-size:11px;font-weight:700;color:#166534;">-&#8377;${discountAmount}</span>
+                </div>` : ''}
+                <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e5e7eb;padding-top:8px;">
+                  <span style="font-size:9px;color:#9ca3af;font-weight:700;text-transform:uppercase;">Total Paid</span>
                   <span style="font-size:22px;font-weight:900;color:#111;">&#8377;${amount ?? "0"}</span>
                 </div>
               </div>
@@ -361,15 +370,27 @@ const PaymentSuccess = () => {
               </div>
 
               {amount && persons && (
-                <div className="flex justify-between items-center text-xs text-foreground mt-2 px-2 pb-1">
-                  <span>Passes: <strong>{persons}</strong></span>
-                  {pricePerPerson && (
-                    <span>
-                      ₹{pricePerPerson}/person
-                      {isSpecial && <span className="ml-1 text-orange-500">({dayType})</span>}
-                    </span>
+                <div className="flex flex-col gap-1 text-xs text-foreground mt-2 px-2 pb-1 bg-background/50 rounded-lg p-2 border border-border/50">
+                  <div className="flex justify-between items-center">
+                    <span>Passes: <strong>{persons}</strong></span>
+                    {pricePerPerson && (
+                      <span>
+                        ₹{pricePerPerson}/person
+                        {isSpecial && <span className="ml-1 text-orange-500">({dayType})</span>}
+                      </span>
+                    )}
+                    <span>Base: <strong>₹{(Number(persons || 1) * Number(pricePerPerson || 800))}</strong></span>
+                  </div>
+                  {discountAmount && Number(discountAmount) > 0 && (
+                    <div className="flex justify-between items-center text-green-600 dark:text-green-500 font-medium">
+                      <span>Discount {appliedCoupon ? `(${appliedCoupon})` : ''}</span>
+                      <span>-₹{discountAmount}</span>
+                    </div>
                   )}
-                  <span>Total: <strong>₹{amount}</strong></span>
+                  <div className="flex justify-between items-center pt-1 border-t border-border mt-1">
+                    <span className="font-semibold text-muted-foreground uppercase tracking-wider text-[10px]">Total Paid</span>
+                    <span className="font-bold text-sm">₹{amount}</span>
+                  </div>
                 </div>
               )}
 
